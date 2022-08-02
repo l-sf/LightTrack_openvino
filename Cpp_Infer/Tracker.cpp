@@ -18,10 +18,6 @@ Eigen::MatrixXf change(const Eigen::MatrixXf &r) {
     return r.cwiseMax(r.cwiseInverse());
 }
 
-nc::NdArray<float> change(const nc::NdArray<float> &r) {
-    return nc::maximum(r, 1.f / r);
-}
-
 Eigen::MatrixXf sz(const Eigen::MatrixXf &w, const Eigen::MatrixXf &h) {
     Eigen::MatrixXf pad = (w + h) * 0.5;
     Eigen::MatrixXf sz2 = (w + pad).cwiseProduct(h + pad);
@@ -32,12 +28,6 @@ float sz(const float w, const float h) {
     float pad = (w + h) * 0.5;
     float sz2 = (w + pad) * (h + pad);
     return std::sqrt(sz2);
-}
-
-nc::NdArray<float> sz(const nc::NdArray<float> &w, const nc::NdArray<float> &h) {
-    nc::NdArray<float> pad = (w + h) * 0.5f;
-    nc::NdArray<float> sz2 = (w + pad) * (h + pad);
-    return nc::sqrt(sz2);
 }
 
 Eigen::MatrixXf mxexp(Eigen::MatrixXf mx) {
@@ -94,7 +84,12 @@ cv::Rect LightTrack::track(cv::Mat &x_img) {
     float s_x = s_z + 2 * pad;
     cv::Mat x_crop = get_subwindow_tracking(x_img, instance_size_, s_x, mean);
 
+    auto start = std::chrono::steady_clock::now();
     update(x_crop, cv::Size(target_bbox_.width * scale_z, target_bbox_.height * scale_z), scale_z);
+    auto end = std::chrono::steady_clock::now();
+    std::chrono::duration<double> elapsed = end - start;
+    double time = 1000 * elapsed.count();
+    printf("preprocess+inference+postprocess time: %f ms\n", time);
 
     target_bbox_.x = std::max(0, std::min(x_img.rows, target_bbox_.x));
     target_bbox_.y = std::max(0, std::min(x_img.cols, target_bbox_.y));
@@ -104,7 +99,6 @@ cv::Rect LightTrack::track(cv::Mat &x_img) {
     return target_bbox_;
 }
 
-#ifdef USE_EIGEN
 
 void LightTrack::update(cv::Mat &x_crop, cv::Size_<float> target_sz, float scale_z) {
     // openvino推理部分
@@ -222,119 +216,6 @@ void LightTrack::gen_grids() {
             << grid_y, grid_y, grid_y, grid_y, grid_y, grid_y, grid_y, grid_y, grid_y, grid_y, grid_y, grid_y, grid_y, grid_y, grid_y, grid_y;
 }
 
-#endif
-
-#ifdef USE_NUMCPP
-void LightTrack::update(cv::Mat &x_crop, cv::Size target_sz, float scale_z) {
-    // openvino推理部分
-    ov::element::Type input_type = ov::element::u8;
-    ov::Shape x_input_shape = {1, 256, 256, 3};
-    // 使用ov::Tensor包装图像数据，无需分配新内存
-    ov::Tensor x_input_tensor = ov::Tensor(input_type, x_input_shape, x_crop.data);
-    x_infer_request_.set_input_tensor(x_input_tensor);
-    x_infer_request_.infer();
-    // 得到搜索图像的特征张量
-    xf_ = x_infer_request_.get_output_tensor();
-
-    head_infer_request_.set_input_tensor(0, zf_);
-    head_infer_request_.set_input_tensor(1, xf_);
-    head_infer_request_.infer();
-    cls_score_ = head_infer_request_.get_output_tensor(0);
-    bbox_pred_ = head_infer_request_.get_output_tensor(1);
-
-    const auto* cls_ptr = cls_score_.data<const float>();
-    const auto* bbox_ptr = bbox_pred_.data<const float>();
-
-    for (int i = 0; i < 5; ++i) {
-        for (int j = 0; j < 16; ++j) {
-            for (int k = 0; k < 16; ++k) {
-                if (i == 0)
-                    pred_x1_(j,k) = static_cast<float>(bbox_ptr[i*256 + j*16 + k]);
-                else if (i == 1)
-                    pred_y1_(j,k) = static_cast<float>(bbox_ptr[i*256 + j*16 + k]);
-                else if (i == 2)
-                    pred_x2_(j,k) = static_cast<float>(bbox_ptr[i*256 + j*16 + k]);
-                else if (i == 3)
-                    pred_y2_(j,k) = static_cast<float>(bbox_ptr[i*256 + j*16 + k]);
-                else
-                    pred_score_(j, k) = static_cast<float>(cls_ptr[j*16 + k]);
-            }
-        }
-    }
-
-    pred_x1_ = grid_to_search_x_ - pred_x1_;
-    pred_y1_ = grid_to_search_y_ - pred_y1_;
-    pred_x2_ = grid_to_search_x_ + pred_x2_;
-    pred_y2_ = grid_to_search_y_ + pred_y2_;
-
-    // size penalty
-    s_c_ = change(sz(pred_x2_ - pred_x1_, pred_y2_ - pred_y1_) / sz(target_sz.width, target_sz.height));  // scale penalty
-    r_c_ = change(float(target_sz.width / target_sz.height) / ((pred_x2_ - pred_x1_) / (pred_y2_ - pred_y1_)));  // ratio penalty
-
-    penalty_ = nc::exp(-(r_c_ * s_c_ - 1.f) * penalty_k_);
-    pscore_ = penalty_ * pred_score_;
-
-    // window penalty
-    pscore_ = pscore_ * (1 - window_influence_) + hanning_win_ * window_influence_;
-
-    // get max
-    auto argmax = nc::argmax(pscore_);
-    int maxRow = int(*argmax.data()) / 16;
-    int maxCol = int(*argmax.data()) % 16;
-
-    // to real size
-    float x1 = pred_x1_(maxRow, maxCol);
-    float y1 = pred_y1_(maxRow, maxCol);
-    float x2 = pred_x2_(maxRow, maxCol);
-    float y2 = pred_y2_(maxRow, maxCol);
-
-    float pred_xs = (x1 + x2) / 2.f;
-    float pred_ys = (y1 + y2) / 2.f;
-    float pred_w = x2 - x1;
-    float pred_h = y2 - y1;
-
-    float diff_xs = pred_xs - float(instance_size_) / 2.f;
-    float diff_ys = pred_ys - float(instance_size_) / 2.f;
-
-    diff_xs = diff_xs / scale_z;
-    diff_ys = diff_ys / scale_z;
-    pred_w = pred_w / scale_z;
-    pred_h = pred_h / scale_z;
-
-    target_sz.width = std::round(float(target_sz.width) / scale_z);
-    target_sz.height = std::round(float(target_sz.height) / scale_z);
-
-    // size learning rate
-    float lr = penalty_(maxRow, maxCol) * pred_score_(maxRow, maxCol) * lr_;
-
-    // size rate
-    float res_xs = target_bbox_.x + target_bbox_.width/2.f + diff_xs;
-    float res_ys = target_bbox_.y + target_bbox_.height/2.f + diff_ys;
-    float res_w = pred_w * lr + (1 - lr) * target_sz.width;
-    float res_h = pred_h * lr + (1 - lr) * target_sz.height;
-
-
-    target_bbox_.width = std::round(target_sz.width * (1 - lr) + lr * res_w);
-    target_bbox_.height = std::round(target_sz.height * (1 - lr) + lr * res_h);
-    target_bbox_.x = std::round(res_xs - target_bbox_.width/2.f);
-    target_bbox_.y = std::round(res_ys - target_bbox_.height/2.f);
-
-}
-
-void LightTrack::gen_window() {
-    hanning_win_ = nc::outer(nc::hanning(score_size_), nc::hanning(score_size_)).astype<float>();
-}
-
-void LightTrack::gen_grids() {
-    nc::NdArray<float> x = nc::zeros<float>(16, 16);
-    nc::NdArray<float> y = nc::zeros<float>(16, 16);
-    std::pair<nc::NdArray<float>,nc::NdArray<float>> (x, y) = nc::meshgrid(nc::arange<float>(0, 16) - nc::floor(float(8)),
-                        nc::arange<float>(0, 16) - nc::floor(float(8)));
-    grid_to_search_x_ = x * float(total_stride_) + instance_size_ / 2.f;
-    grid_to_search_y_ = y * float(total_stride_) + instance_size_ / 2.f;
-
-}
-#endif
 
 cv::Mat LightTrack::get_subwindow_tracking(cv::Mat &img, int model_sz, float original_sz, const cv::Scalar &avg_chans) {
     cv::Mat img_patch_ori;  // 填充不缩放
@@ -370,10 +251,7 @@ cv::Mat LightTrack::get_subwindow_tracking(cv::Mat &img, int model_sz, float ori
         cv::resize(img_patch_ori, img_patch, cv::Size(model_sz, model_sz));
     else
         img_patch = img_patch_ori;
-#ifdef DEBUG
-    cv::imshow("crop", img_patch);
-    cv::waitKey(0);
-#endif
+
     return img_patch;
 }
 

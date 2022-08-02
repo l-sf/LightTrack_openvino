@@ -145,7 +145,7 @@ class LightTrack(object):
         start = time.time()
         self.update(x_in_tensor, self.target_size * scale_z, scale_z)
         end = time.time()
-        print('preprocess + inference + postprocess time = ', 1000 * (end - start), 'ms')
+        print('preprocess+inference+postprocess time = ', 1000 * (end - start), 'ms')
 
         self.target_pos[0] = max(0, min(x_img.shape[1], self.target_pos[0]))
         self.target_pos[1] = max(0, min(x_img.shape[0], self.target_pos[1]))

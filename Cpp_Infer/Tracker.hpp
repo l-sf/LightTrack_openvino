@@ -20,11 +20,7 @@
 #include <opencv2/core/eigen.hpp>
 #include <inference_engine.hpp>
 #include <openvino/openvino.hpp>
-#include "NumCpp.hpp"
 
-#define USE_EIGEN
-//#define USE_NUMCPP
-//#define DEBUG
 
 class LightTrack {
 public:
@@ -72,7 +68,6 @@ private:
     ov::Tensor cls_score_;
     ov::Tensor bbox_pred_;
 
-#ifdef USE_EIGEN
     Eigen::Matrix<float, 16, 16> hanning_win_;
     Eigen::Matrix<float, 16, 16> grid_to_search_x_;
     Eigen::Matrix<float, 16, 16> grid_to_search_y_;
@@ -85,22 +80,6 @@ private:
     Eigen::Matrix<float, 16, 16> r_c_;
     Eigen::Matrix<float, 16, 16> penalty_;
     Eigen::Matrix<float, 16, 16> pscore_;
-#endif
-
-#ifdef USE_NUMCPP
-    nc::NdArray<float> hanning_win_ = nc::zeros<float>(16, 16);
-    nc::NdArray<float> grid_to_search_x_ = nc::zeros<float>(16, 16);
-    nc::NdArray<float> grid_to_search_y_ = nc::zeros<float>(16, 16);
-    nc::NdArray<float> pred_score_ = nc::zeros<float>(16, 16);
-    nc::NdArray<float> pred_x1_ = nc::zeros<float>(16, 16);
-    nc::NdArray<float> pred_x2_ = nc::zeros<float>(16, 16);
-    nc::NdArray<float> pred_y1_ = nc::zeros<float>(16, 16);
-    nc::NdArray<float> pred_y2_ = nc::zeros<float>(16, 16);
-    nc::NdArray<float> s_c_ = nc::zeros<float>(16, 16);
-    nc::NdArray<float> r_c_ = nc::zeros<float>(16, 16);
-    nc::NdArray<float> penalty_ = nc::zeros<float>(16, 16);
-    nc::NdArray<float> pscore_ = nc::zeros<float>(16, 16);
-#endif
 
     /**
      * @brief 跟踪器更新

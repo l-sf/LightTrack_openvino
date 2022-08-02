@@ -9,7 +9,6 @@ find_package(ngraph REQUIRED)
 
 include_directories(
     "/usr/include/eigen3"
-    "/home/c2214/Third_party/NumCpp/include"
     ${OpenCV_INCLUDE_DIRS}
     ${CMAKE_CURRENT_SOURCE_DIR}
     ${CMAKE_CURRENT_BINARY_DIR}
