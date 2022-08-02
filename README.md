@@ -28,7 +28,7 @@ https://github.com/researchmm/LightTrack
 | i7-10710U |                     待测                      |
 | i7-7700HQ |                     7.2ms                     |
 
-**注：**速度测试代码在 Python 和 C++ 代码中的位置如下，包括了整个 update 过程，并且模型中已经融入了预处理，因此测试的时间为 preprocess+inference+postprocess 的全部时间。
+**注**：速度测试代码在 Python 和 C++ 代码中的位置如下，包括了整个 update 过程，并且模型中已经融入了预处理，因此测试的时间为 preprocess+inference+postprocess 的全部时间。
 
 ```python
 # Python
