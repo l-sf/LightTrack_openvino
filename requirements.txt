@@ -1,3 +1,0 @@
-numpy==1.19.5
-opencv-python==4.5.1
-openvino-dev[onnx]==2022.1.0

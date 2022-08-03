@@ -10,14 +10,14 @@ from openvino.offline_transformations import serialize
 z_feature_path = "/home/c2214/Object_Tracking/LightTrack/models/new_ir_models/z_feature.xml"
 x_feature_path = "/home/c2214/Object_Tracking/LightTrack/models/new_ir_models/x_feature.xml"
 
-# Step1: Create OpenVINO Runtime Core
+# Step1: 创建OpenVINO运行时
 core = Core()
 
-# Step2: Read the Model and Load the model
+# Step2: 读取模型、加载模型
 z_feature_model = core.read_model(z_feature_path)
 x_feature_model = core.read_model(x_feature_path)
 
-# Step3: integrate preprocess function into the model by OpenVINO PrePostProcessor
+# Step3: 通过OpenVINO预处理器将预处理功能集成到模型中
 # 模板分支的预处理
 z_ppp = PrePostProcessor(z_feature_model)
 z_ppp.input().tensor() \
@@ -47,6 +47,7 @@ x_ppp.input().preprocess() \
     .scale([58.395, 57.12, 57.375])
 x_feature_model = x_ppp.build()
 
-# Step4: Save the Model with preprocess
+# Step4: 使用预处理保存模型
 serialize(z_feature_model, 'z_feature.xml', 'z_feature.bin')
 serialize(x_feature_model, 'x_feature.xml', 'x_feature.bin')
+

@@ -10,8 +10,8 @@ using namespace std;
 
 
 int main(int argc, char* argv[]){
-//    string video_path = "../images/bag.avi";
-//    string image_path = "../images/Woman/img/%04d.jpg";
+//    string video_path = "../../images/bag.avi";
+//    string image_path = "../../images/Woman/img/%04d.jpg";
     string gt_path = "../../images/Woman/groundtruth_rect.txt";
 
     string z_path = "../../models/z_feature.xml";

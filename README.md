@@ -25,10 +25,10 @@ https://github.com/researchmm/LightTrack
 | Intel CPU | preprocess+inference+postprocess average time |
 | :-------: | :-------------------------------------------: |
 | i7-11700K |                     3.4ms                     |
-| i7-10710U |                     待测                      |
-| i7-7700HQ |                     7.2ms                     |
+| i7-10710U |                     5.5ms                     |
+| i7-7700HQ |                     7.5ms                     |
 
-**注**：速度测试代码在 Python 和 C++ 代码中的位置如下，包括了整个 update 过程，并且模型中已经融入了预处理，因此测试的时间为 preprocess+inference+postprocess 的全部时间。
+Python 和 C++ 速度测试代码如下，包括了整个 update 过程，并且模型中已经融入了预处理，因此测试的时间为 preprocess+inference+postprocess 的全部时间。
 
 ```python
 # Python
@@ -48,7 +48,13 @@ double time = 1000 * elapsed.count();
 printf("preprocess+inference+postprocess time: %f ms\n", time);
 ```
 
-实际程序运行速度取决于跟踪目标的大小，这里计时不包括图像块的剪裁和填充操作，目标越大耗时越多，速度越慢。
+**注**：实际程序运行速度取决于跟踪目标的大小，这里计时不包括图像块的剪裁和填充操作，目标越大耗时越多，速度越慢。完整流程C++ 程序比上述所测时间多耗时2ms左右。
+
+
+
+## 导出模型 参考
+
+[README](./models/README.md) 
 
 
 
@@ -65,16 +71,39 @@ apt-cache search openvino
 sudo apt install openvino
 ```
 
-安装python(3.6~3.9)依赖
-
-```bash
-pip install -r requirements.txt
-```
-
 Run this command in shell. (Every time before using OpenVINO)
 
 ```bash
 source /opt/intel/openvino_2022/setupvars.sh
+```
+
+安装python(3.8)依赖
+
+```bash
+cd /opt/intel/openvino_2022/tools
+pip install -r requirements[onnx].txt
+```
+
+
+
+## Python demo Run
+
+**视频文件输入:** 
+
+```bash
+python infer.py --mode 0 --video "../images/bag.avi"
+```
+
+**摄像头输入:**
+
+```bash
+python infer.py --mode 1
+```
+
+**图片序列输入:**
+
+```bash
+python infer.py --mode 2 --image_path "../images/Woman/img/*.jpg"
 ```
 
 
@@ -111,29 +140,5 @@ cmake .. && make -j
 
 
 
-## Python demo Run
-
-**视频文件输入:** 
-
-```bash
-python infer.py --mode 0 --video "../images/bag.avi"
-```
-
-**摄像头输入:**
-
-```bash
-python infer.py --mode 1
-```
-
-**图片序列输入:**
-
-```bash
-python infer.py --mode 2 --image_path "../images/Woman/img/*.jpg"
-```
-
-
-
-## Export model and add preprocess tutorial
-
-coming soon
+**注**：C++ 的跟踪效果不如Python好，大多数情况没有差别，在目标出现在接近视野右边时，目标框会发生向左的偏差，如果您发现bug还请不吝赐教。
 
