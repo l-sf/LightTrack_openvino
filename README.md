@@ -10,7 +10,7 @@ https://github.com/researchmm/LightTrack
 
 
 
-## 说明
+## 介绍
 
 本仓库基于 Intel OpenVINO Toolkit 部署 LightTrack 跟踪算法，包含 Python、C++ 两种语言的推理代码 。
 
@@ -52,7 +52,7 @@ printf("preprocess+inference+postprocess time: %f ms\n", time);
 
 
 
-## 导出模型 参考
+## 导出模型 说明
 
 [README](./models/README.md) 
 
