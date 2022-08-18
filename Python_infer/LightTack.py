@@ -1,7 +1,7 @@
 #
 # Created by lsf on 2022/7/19.
 #
-
+import cv2
 import numpy as np
 from openvino.runtime import Core
 from utils import get_subwindow_tracking
@@ -58,12 +58,11 @@ class LightTrack(object):
     def init(self, z_img, target_pos, target_size):
         self.target_pos = target_pos
         self.target_size = target_size
-        avg_chans = np.mean(z_img, axis=(0, 1))
+        avg_chans = np.mean(z_img, axis=(0, 1))  # .astype('float32')
         wc_z = target_size[0] + 0.5 * sum(target_size)
         hc_z = target_size[1] + 0.5 * sum(target_size)
         s_z = round(np.sqrt(wc_z * hc_z))  # (s_z)^2=(w+2p)x(h+2p), 模板图像上 不缩放时的 框加上pad 的大小
         z_crop = get_subwindow_tracking(z_img, target_pos, self.exemplar_size, s_z, avg_chans)
-        # z_crop = self.normalize(z_crop.transpose(2, 0, 1))
         z_in_tensor = np.expand_dims(z_crop, axis=0)
 
         self.z_infer_request.infer({0: z_in_tensor})

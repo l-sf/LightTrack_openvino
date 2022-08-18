@@ -10,7 +10,7 @@ https://github.com/researchmm/LightTrack
 
 
 
-## 说明
+## 介绍
 
 本仓库基于 Intel OpenVINO Toolkit 部署 LightTrack 跟踪算法，包含 Python、C++ 两种语言的推理代码 。
 
@@ -137,5 +137,4 @@ python infer.py --mode 1
 ```bash
 python infer.py --mode 2 --image_path "../images/Woman/img/*.jpg"
 ```
-
 

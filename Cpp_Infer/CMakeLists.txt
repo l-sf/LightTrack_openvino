@@ -12,6 +12,7 @@ include_directories(
     ${OpenCV_INCLUDE_DIRS}
     ${CMAKE_CURRENT_SOURCE_DIR}
     ${CMAKE_CURRENT_BINARY_DIR}
+    "/media/c2214/sn750_disk2/anaconda3/envs/Ocean/include/python3.7m"
 )
 
 add_executable(LightTrack main.cpp Tracker.cpp)
