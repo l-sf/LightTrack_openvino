@@ -91,10 +91,10 @@ cv::Rect LightTrack::track(cv::Mat &x_img) {
     double time = 1000 * elapsed.count();
     printf("preprocess+inference+postprocess time: %f ms\n", time);
 
-    target_bbox_.x = std::max(0, std::min(x_img.rows, target_bbox_.x));
-    target_bbox_.y = std::max(0, std::min(x_img.cols, target_bbox_.y));
-    target_bbox_.width = std::max(10, std::min(x_img.rows, target_bbox_.width));
-    target_bbox_.height = std::max(10, std::min(x_img.cols, target_bbox_.height));
+    target_bbox_.x = std::max(0, std::min(x_img.cols, target_bbox_.x));
+    target_bbox_.y = std::max(0, std::min(x_img.rows, target_bbox_.y));
+    target_bbox_.width = std::max(10, std::min(x_img.cols, target_bbox_.width));
+    target_bbox_.height = std::max(10, std::min(x_img.rows, target_bbox_.height));
 
     return target_bbox_;
 }

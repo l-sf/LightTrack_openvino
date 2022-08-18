@@ -52,7 +52,7 @@ printf("preprocess+inference+postprocess time: %f ms\n", time);
 
 
 
-## 导出模型 参考
+## 模型修改与导出 tutorials
 
 [README](./models/README.md) 
 
@@ -82,28 +82,6 @@ source /opt/intel/openvino_2022/setupvars.sh
 ```bash
 cd /opt/intel/openvino_2022/tools
 pip install -r requirements[onnx].txt
-```
-
-
-
-## Python demo Run
-
-**视频文件输入:** 
-
-```bash
-python infer.py --mode 0 --video "../images/bag.avi"
-```
-
-**摄像头输入:**
-
-```bash
-python infer.py --mode 1
-```
-
-**图片序列输入:**
-
-```bash
-python infer.py --mode 2 --image_path "../images/Woman/img/*.jpg"
 ```
 
 
@@ -140,5 +118,24 @@ cmake .. && make -j
 
 
 
-**注**：C++ 的跟踪效果不如Python好，大多数情况没有差别，在目标出现在接近视野右边时，目标框会发生向左的偏差，如果您发现bug还请不吝赐教。
+## Python demo Run
+
+**视频文件输入:** 
+
+```bash
+python infer.py --mode 0 --video "../images/bag.avi"
+```
+
+**摄像头输入:**
+
+```bash
+python infer.py --mode 1
+```
+
+**图片序列输入:**
+
+```bash
+python infer.py --mode 2 --image_path "../images/Woman/img/*.jpg"
+```
+
 
