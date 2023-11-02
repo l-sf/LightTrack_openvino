@@ -1,0 +1,4 @@
+/usr/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/usr/bin/make -G "CodeBlocks - Unix Makefiles" -S /home/lsf/Object_Tracking/SOT/LightTrack_openvino/Cpp_Infer -B /home/lsf/Object_Tracking/SOT/LightTrack_openvino/Cpp_Infer/cmake-build-debug
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/lsf/Object_Tracking/SOT/LightTrack_openvino/Cpp_Infer/cmake-build-debug

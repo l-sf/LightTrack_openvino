@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="LightTrack"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;CMake Files\..\;CMake Files\..\..\;CMake Files\..\..\..\;CMake Files\..\..\..\..\;CMake Files\..\..\..\..\..\;CMake Files\..\..\..\..\..\..\;CMake Files\..\..\..\..\..\..\usr\;CMake Files\..\..\..\..\..\..\usr\local\;CMake Files\..\..\..\..\..\..\usr\local\lib\;CMake Files\..\..\..\..\..\..\usr\local\lib\cmake\;CMake Files\..\..\..\..\..\..\usr\local\lib\cmake\opencv4\;CMake Files\..\..\..\..\..\..\usr\lib\;CMake Files\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\;CMake Files\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\;CMake Files\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\inferenceengine2022.3.0\;CMake Files\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\openvino2022.3.0\;CMake Files\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\ngraph2022.3.0\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/home/lsf/Object_Tracking/SOT/LightTrack_openvino/Cpp_Infer/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j20 -f &quot;/home/lsf/Object_Tracking/SOT/LightTrack_openvino/Cpp_Infer/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j20 -f &quot;/home/lsf/Object_Tracking/SOT/LightTrack_openvino/Cpp_Infer/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j20 -f &quot;/home/lsf/Object_Tracking/SOT/LightTrack_openvino/Cpp_Infer/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j20 -f &quot;/home/lsf/Object_Tracking/SOT/LightTrack_openvino/Cpp_Infer/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/home/lsf/Object_Tracking/SOT/LightTrack_openvino/Cpp_Infer/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j20 -f &quot;/home/lsf/Object_Tracking/SOT/LightTrack_openvino/Cpp_Infer/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j20 -f &quot;/home/lsf/Object_Tracking/SOT/LightTrack_openvino/Cpp_Infer/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j20 -f &quot;/home/lsf/Object_Tracking/SOT/LightTrack_openvino/Cpp_Infer/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j20 -f &quot;/home/lsf/Object_Tracking/SOT/LightTrack_openvino/Cpp_Infer/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/home/lsf/Object_Tracking/SOT/LightTrack_openvino/Cpp_Infer/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j20 -f &quot;/home/lsf/Object_Tracking/SOT/LightTrack_openvino/Cpp_Infer/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j20 -f &quot;/home/lsf/Object_Tracking/SOT/LightTrack_openvino/Cpp_Infer/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j20 -f &quot;/home/lsf/Object_Tracking/SOT/LightTrack_openvino/Cpp_Infer/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j20 -f &quot;/home/lsf/Object_Tracking/SOT/LightTrack_openvino/Cpp_Infer/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="LightTrack">
+				<Option output="/home/lsf/Object_Tracking/SOT/LightTrack_openvino/Cpp_Infer/cmake-build-debug/LightTrack" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/lsf/Object_Tracking/SOT/LightTrack_openvino/Cpp_Infer/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DTBB_PREVIEW_WAITING_FOR_WORKERS=1"/>
+					<Add option="-DIE_THREAD=IE_THREAD_TBB"/>
+					<Add directory="/usr/include/eigen3"/>
+					<Add directory="/home/lsf/Object_Tracking/SOT/LightTrack_openvino/Cpp_Infer"/>
+					<Add directory="/home/lsf/Object_Tracking/SOT/LightTrack_openvino/Cpp_Infer/cmake-build-debug"/>
+					<Add directory="/usr/local/include/opencv4"/>
+					<Add directory="/usr/include/ie"/>
+					<Add directory="/usr/include/c++/9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/9"/>
+					<Add directory="/usr/include/c++/9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j20 -f &quot;/home/lsf/Object_Tracking/SOT/LightTrack_openvino/Cpp_Infer/cmake-build-debug/Makefile&quot;  VERBOSE=1 LightTrack"/>
+					<CompileFile command="/usr/bin/make -j20 -f &quot;/home/lsf/Object_Tracking/SOT/LightTrack_openvino/Cpp_Infer/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j20 -f &quot;/home/lsf/Object_Tracking/SOT/LightTrack_openvino/Cpp_Infer/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j20 -f &quot;/home/lsf/Object_Tracking/SOT/LightTrack_openvino/Cpp_Infer/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="LightTrack/fast">
+				<Option output="/home/lsf/Object_Tracking/SOT/LightTrack_openvino/Cpp_Infer/cmake-build-debug/LightTrack" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/lsf/Object_Tracking/SOT/LightTrack_openvino/Cpp_Infer/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DTBB_PREVIEW_WAITING_FOR_WORKERS=1"/>
+					<Add option="-DIE_THREAD=IE_THREAD_TBB"/>
+					<Add directory="/usr/include/eigen3"/>
+					<Add directory="/home/lsf/Object_Tracking/SOT/LightTrack_openvino/Cpp_Infer"/>
+					<Add directory="/home/lsf/Object_Tracking/SOT/LightTrack_openvino/Cpp_Infer/cmake-build-debug"/>
+					<Add directory="/usr/local/include/opencv4"/>
+					<Add directory="/usr/include/ie"/>
+					<Add directory="/usr/include/c++/9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/9"/>
+					<Add directory="/usr/include/c++/9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j20 -f &quot;/home/lsf/Object_Tracking/SOT/LightTrack_openvino/Cpp_Infer/cmake-build-debug/Makefile&quot;  VERBOSE=1 LightTrack/fast"/>
+					<CompileFile command="/usr/bin/make -j20 -f &quot;/home/lsf/Object_Tracking/SOT/LightTrack_openvino/Cpp_Infer/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j20 -f &quot;/home/lsf/Object_Tracking/SOT/LightTrack_openvino/Cpp_Infer/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j20 -f &quot;/home/lsf/Object_Tracking/SOT/LightTrack_openvino/Cpp_Infer/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/home/lsf/Object_Tracking/SOT/LightTrack_openvino/Cpp_Infer/Tracker.cpp">
+			<Option target="LightTrack"/>
+		</Unit>
+		<Unit filename="/home/lsf/Object_Tracking/SOT/LightTrack_openvino/Cpp_Infer/Tracker.hpp">
+			<Option target="LightTrack"/>
+		</Unit>
+		<Unit filename="/home/lsf/Object_Tracking/SOT/LightTrack_openvino/Cpp_Infer/main.cpp">
+			<Option target="LightTrack"/>
+		</Unit>
+		<Unit filename="/home/lsf/Object_Tracking/SOT/LightTrack_openvino/Cpp_Infer/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/home/lsf/Object_Tracking/SOT/LightTrack_openvino/Cpp_Infer/../../../../../../usr/local/lib/cmake/opencv4/OpenCVConfig-version.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\usr\local\lib\cmake\opencv4\"/>
+		</Unit>
+		<Unit filename="/home/lsf/Object_Tracking/SOT/LightTrack_openvino/Cpp_Infer/../../../../../../usr/local/lib/cmake/opencv4/OpenCVConfig.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\usr\local\lib\cmake\opencv4\"/>
+		</Unit>
+		<Unit filename="/home/lsf/Object_Tracking/SOT/LightTrack_openvino/Cpp_Infer/../../../../../../usr/local/lib/cmake/opencv4/OpenCVModules-release.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\usr\local\lib\cmake\opencv4\"/>
+		</Unit>
+		<Unit filename="/home/lsf/Object_Tracking/SOT/LightTrack_openvino/Cpp_Infer/../../../../../../usr/local/lib/cmake/opencv4/OpenCVModules.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\usr\local\lib\cmake\opencv4\"/>
+		</Unit>
+		<Unit filename="/home/lsf/Object_Tracking/SOT/LightTrack_openvino/Cpp_Infer/../../../../../../usr/lib/x86_64-linux-gnu/cmake/inferenceengine2022.3.0/InferenceEngineConfig-version.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\inferenceengine2022.3.0\"/>
+		</Unit>
+		<Unit filename="/home/lsf/Object_Tracking/SOT/LightTrack_openvino/Cpp_Infer/../../../../../../usr/lib/x86_64-linux-gnu/cmake/inferenceengine2022.3.0/InferenceEngineConfig.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\inferenceengine2022.3.0\"/>
+		</Unit>
+		<Unit filename="/home/lsf/Object_Tracking/SOT/LightTrack_openvino/Cpp_Infer/../../../../../../usr/lib/x86_64-linux-gnu/cmake/openvino2022.3.0/OpenVINOConfig-version.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\openvino2022.3.0\"/>
+		</Unit>
+		<Unit filename="/home/lsf/Object_Tracking/SOT/LightTrack_openvino/Cpp_Infer/../../../../../../usr/lib/x86_64-linux-gnu/cmake/openvino2022.3.0/OpenVINOConfig.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\openvino2022.3.0\"/>
+		</Unit>
+		<Unit filename="/home/lsf/Object_Tracking/SOT/LightTrack_openvino/Cpp_Infer/../../../../../../usr/lib/x86_64-linux-gnu/cmake/openvino2022.3.0/OpenVINOTargets-release.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\openvino2022.3.0\"/>
+		</Unit>
+		<Unit filename="/home/lsf/Object_Tracking/SOT/LightTrack_openvino/Cpp_Infer/../../../../../../usr/lib/x86_64-linux-gnu/cmake/openvino2022.3.0/OpenVINOTargets.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\openvino2022.3.0\"/>
+		</Unit>
+		<Unit filename="/home/lsf/Object_Tracking/SOT/LightTrack_openvino/Cpp_Infer/../../../../../../usr/lib/x86_64-linux-gnu/cmake/ngraph2022.3.0/ngraphConfig.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\ngraph2022.3.0\"/>
+		</Unit>
+		<Unit filename="/home/lsf/Object_Tracking/SOT/LightTrack_openvino/Cpp_Infer/../../../../../../usr/lib/x86_64-linux-gnu/cmake/ngraph2022.3.0/ngraphConfigVersion.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\ngraph2022.3.0\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>
