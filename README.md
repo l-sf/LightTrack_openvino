@@ -28,28 +28,6 @@ https://github.com/researchmm/LightTrack
 | i7-10710U |                     5.5ms                     |
 | i7-7700HQ |                     7.5ms                     |
 
-Python 和 C++ 速度测试代码如下，包括了整个 update 过程，并且模型中已经融入了预处理，因此测试的时间为 preprocess+inference+postprocess 的全部时间。
-
-```python
-# Python
-start = time.time()
-self.update(x_in_tensor, self.target_size * scale_z, scale_z)
-end = time.time()
-print('preprocess+inference+postprocess time = ', 1000 * (end - start), 'ms')
-```
-
-```c++
-// C++
-auto start = std::chrono::steady_clock::now();
-update(x_crop, cv::Size(target_bbox_.width * scale_z, target_bbox_.height * scale_z), scale_z);
-auto end = std::chrono::steady_clock::now();
-std::chrono::duration<double> elapsed = end - start;
-double time = 1000 * elapsed.count();
-printf("preprocess+inference+postprocess time: %f ms\n", time);
-```
-
-**注**：实际程序运行速度取决于跟踪目标的大小，这里计时不包括图像块的剪裁和填充操作，目标越大耗时越多，速度越慢。完整流程C++ 程序比上述所测时间多耗时2ms左右。
-
 
 
 ## 模型修改与导出 tutorials
