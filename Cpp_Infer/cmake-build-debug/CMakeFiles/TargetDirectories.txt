@@ -1,3 +1,0 @@
-/home/lsf/Object_Tracking/SOT/LightTrack_openvino/Cpp_Infer/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/lsf/Object_Tracking/SOT/LightTrack_openvino/Cpp_Infer/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/lsf/Object_Tracking/SOT/LightTrack_openvino/Cpp_Infer/cmake-build-debug/CMakeFiles/LightTrack.dir
