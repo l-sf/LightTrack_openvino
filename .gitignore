@@ -1,6 +1,7 @@
 Cpp_Infer/.idea
 Cpp_Infer/.vscode
 Cpp_Infer/build
+Cpp_Infer/cmake-build-debug
 Python_infer/.idea
 Python_infer/.vscode
 Python_infer/__pycache__
